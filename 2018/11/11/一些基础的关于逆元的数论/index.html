@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="一些基础的关于逆元的数论">
+<meta property="og:url" content="http://yoursite.com/2018/11/11/一些基础的关于逆元的数论/index.html">
+<meta property="og:site_name" content="KL-lovesagiri&#39;s blog">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2018/10/30/5bd83d9664e43.jpg">
+<meta property="og:updated_time" content="2018-11-06T08:32:15.785Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一些基础的关于逆元的数论">
+<meta name="twitter:image" content="https://i.loli.net/2018/10/30/5bd83d9664e43.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/11/一些基础的关于逆元的数论/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>一些基础的关于逆元的数论 | KL-lovesagiri's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">KL-lovesagiri's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/11/一些基础的关于逆元的数论/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="I WANT TO BE A BOLD HERO!!!!!!">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="KL-lovesagiri's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一些基础的关于逆元的数论
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-11-11 21:54:10" itemprop="dateCreated datePublished" datetime="2018-11-11T21:54:10+08:00">2018-11-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-11-06 16:32:15" itemprop="dateModified" datetime="2018-11-06T16:32:15+08:00">2018-11-06</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://i.loli.net/2018/10/30/5bd83d9664e43.jpg" alt=""><br><a id="more"></a></p>
+<p>好吧其实都跟逆元有关…</p>
+<h2 id="扩展欧几里得（exgcd）解同余方程"><a href="#扩展欧几里得（exgcd）解同余方程" class="headerlink" title="扩展欧几里得（exgcd）解同余方程"></a>扩展欧几里得（exgcd）解同余方程</h2><h3 id="问题简述"><a href="#问题简述" class="headerlink" title="问题简述"></a>问题简述</h3><p>求关于 x 的同余方程 ax ≡ 1 (mod b)的最小正整数解。</p>
+<h3 id="实质"><a href="#实质" class="headerlink" title="实质"></a>实质</h3><p>对数论一无所知的我一开始连式子都看不懂，然后去网上找这个式子的含义。<br>其实就是说<br>​ <strong>ax%b=1(a,b一定要互质，不然无解的)<br>​     ax=by+1<br>​     ax-by=1<br>​     ax+by=1</strong><br>​     因为a,b互质，所以<br>$$<br>ax+by=gcd(a,b)<br>$$<br>(以下部分摘自别人的博客）(<a href="https://www.zybuluo.com/samzhang/note/541890" target="_blank" rel="noopener">https://www.zybuluo.com/samzhang/note/541890</a>)<br>对于方程ax + by = gcd(a, b)；我们设解为x,  y</p>
+<p>我们令a = b, b = a % b;</p>
+<p>得到方程bx + (a % b)y = gcd(b， a % b);</p>
+<p>由欧几里得算法可以得到gcd(a, b) = gcd(b, (a % b));</p>
+<p>代入可得：bx +( a % b )y = gcd(a, b)</p>
+<p>设此方程解为x1, y1；</p>
+<p>在计算机中我们知道： a % b = a - (a / b) * b;</p>
+<p>代入方程化解得：</p>
+<p>ay1 + b(x1 - (a / b) y1) = gcd(a, b);</p>
+<p>与ax + by = gcd(a, b) 联立，我们很容易得：</p>
+<p>x = y1, y = x1- (a / b)y1</p>
+<p>然后我们就这样可以解出来了。</p>
+<p>明显要用递归来推这个式子的解，当b=0 时，只有x=1,y=0才能使a<em>1+b</em>0=gcd(a,0)</p>
+<p>由此我们把$ax + by = 1$的其中一组解解出来了， 仅仅是其中一组解。</p>
+<p>按着这个意思我们就可以写出exgcd的代码了！！！<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> &amp;x,<span class="keyword">int</span> &amp;y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        x=<span class="number">1</span>;</span><br><span class="line">        y=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> x1,y1;</span><br><span class="line">    exgcd(b,a%b,x1,y1);</span><br><span class="line">    x=y1;</span><br><span class="line">    y=x1-(a/b)*y1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>however</strong><br>这个方程的x是会解出负解的，然而我们要求的是最小正整数解，我们将如何应对！！？？<br>从别处学到了这种操作,如下<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>,(x+b)%b);</span><br></pre></td></tr></table></figure></p>
+<p>没错，基础地操作<br>原题 <a href="https://www.luogu.org/problemnew/show/P1082#sub" target="_blank" rel="noopener">P1082</a><br>（一个晚上加上同学的解释才稍微搞懂了一些，然而感觉还是半懂不懂的，还要继续理解啊…..)</p>
+<h2 id="扩展欧几里得算法（exgcd）解不定方程"><a href="#扩展欧几里得算法（exgcd）解不定方程" class="headerlink" title="扩展欧几里得算法（exgcd）解不定方程"></a>扩展欧几里得算法（exgcd）解不定方程</h2><p>（以下部分转自<a href="https://www.cnblogs.com/khan724/p/4148954.html" target="_blank" rel="noopener">解不定方程</a>）<br>昨天做了用扩展欧几里得做的同余方程，然后在题解的推荐下去做了<a href="https://www.luogu.org/problemnew/show/P1516" target="_blank" rel="noopener">P1516青蛙（蛤）的约会（+1s）</a><br>乍一看，这个题挺暴力的，退了一波式子发现其实就是解不定方程<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(x+mt)%L=y+nt</span><br><span class="line"></span><br><span class="line">x+mt=kL+(y+nt)<span class="comment">//哎哟我名字是kl</span></span><br><span class="line"></span><br><span class="line">x+mt-y-nt-kL=<span class="number">0</span></span><br><span class="line"></span><br><span class="line">(m-n)t-kL=y-x</span><br></pre></td></tr></table></figure></p>
+<p>关键来了<br>$$<br>(m-n)t+kL=y-x<br>$$<br>我们把m-n看成a,L看成b,y-x看成d<br>就会发现其实就是要解at+bk=d<br><strong>( 就是解不定方程啊)</strong><br>然后就开始查资料，查如何用exgcd解类似的方程了<br>下面给出步骤</p>
+<p>先给出定理：方程a<em>x+b</em>y=c有解，当且仅当 c%gcd(a，b)=0。</p>
+<p>　　定理的证明很容易，如下：</p>
+<p>　　证明：</p>
+<p>　　若c%gcd(a，b)=0,则一定存在一个整数K，有c=K*gcd(a，b)， 而我们知道ax+by=gcd(a，b)一定存在解(x1, y1)，所以就有K(ax1 +by1 )  = Kgcd(a，b)——&gt;aKx1 +bKy1 = c，得出解为：(Kx1 , Ky1 )。定理得证。</p>
+<p>　　那么在ax+by=c有解的情况下如何求解呢？</p>
+<p>　　由上可知，ax+by=c 与 ax+by=Kgcd(a,b)是等价的。另外ax+by=gcd(a,b)的一组解为 x1, y1。</p>
+<p>　　令a1=a/gcd(a,b), b1=b/gcd(a,b),c1=c/gcd(a,b).</p>
+<p>　　综上，我们可以得出x，y的一组解就是x1c1， y1c1(实际上这个解我们在上面的证明定理的过程中就可以得出这组解，只是我们要的是最小解，所以在此处给出)，但是满足方程的解有无穷多个，在实际的解题中我们常常只要求其最小解。现以求x的最小解为例，至此我们已经求的一组解使得满足方程ax+by=m，那么a(x+nb)+b(y-na)=m显然也成立。可知x+nb(n=….-2,-1,0,1,2….)就是方程x解集。存在一个k使得x+kb&gt;0，x的最小解就是(x+kb)%b.若我们将方程两边同时除以gcd(a,b)，则方程变为a1x+b1y=c1，同上分析可知。x的最小值就是（x+kb1）%b1，由于b1&lt;=b，故这个值定会小于等于之前我们认为最小值。在实际求解时常用while(x&lt;0) x+=b来使得为正的条件满足。</p>
+<p>　　另外给出所有解得公式，若x0，y0是该方程的一组整数解，那么该方程的所有整数解可表示为</p>
+<p>　　X = x0+b/(a,b)t;</p>
+<p>　　Y = y0- a/(a,b)t;</p>
+<p>  然后给出标程</p>
+<ul>
+<li>其实就是在求exgcd的基础上加了一个求真gcd的函数和求最终解的操作<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> a,b,x,y,d;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> e,r,m,n,l;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> a,<span class="keyword">long</span> <span class="keyword">long</span> b,<span class="keyword">long</span> <span class="keyword">long</span> &amp;x,<span class="keyword">long</span> <span class="keyword">long</span> &amp;y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(b==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        x=<span class="number">1</span>;</span><br><span class="line">        y=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> x1,y1;</span><br><span class="line">    exgcd(b,a%b,x1,y1);</span><br><span class="line">    x=y1;</span><br><span class="line">    y=x1-(a/b)*y1;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">gcd</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> x,<span class="keyword">long</span> <span class="keyword">long</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(y==<span class="number">0</span>)<span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">return</span> gcd(y,x%y);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld %lld %lld %lld %lld"</span>,&amp;e,&amp;r,&amp;m,&amp;n,&amp;l);</span><br><span class="line">    a=m-n,b=l,d=r-e;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> c=gcd(a,b);</span><br><span class="line">    <span class="keyword">if</span>(d%c!=<span class="number">0</span>)<span class="built_in">printf</span>(<span class="string">"Impossible"</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        exgcd(a,b,x,y);</span><br><span class="line">        x=x*(d/c);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld"</span>,(x+<span class="built_in">abs</span>(b/c))%<span class="built_in">abs</span>(b/c));<span class="comment">//因为求得的gcd可能为负数，所以在b/gcd的时候要加abs，然后这一步的操作和之前求同余方程的最后一步类似，就是避免解出来的x是负解，往后再找一个通解就是最终的解了</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="快速幂-快速乘法"><a href="#快速幂-快速乘法" class="headerlink" title="快速幂+快速乘法"></a>快速幂+快速乘法</h2><p>特别实用的两个函数，而且如果题目要求取模，两个函数都可以以高效率和不超long long的特点运行<br>很好理解吧</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ll <span class="title">mul</span><span class="params">(ll x,ll y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll sum=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(y)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(y%<span class="number">2</span>)&#123;sum=(sum+x)%p;&#125;</span><br><span class="line">        x=(x+x)%p;</span><br><span class="line">        y/=<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">ksm</span><span class="params">(ll x,ll y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll sum=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(y)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(y%<span class="number">2</span>)&#123;sum=mul(sum,x);&#125;</span><br><span class="line">        x=mul(x,x);</span><br><span class="line">        y/=<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="费马小定理求乘法逆元"><a href="#费马小定理求乘法逆元" class="headerlink" title="费马小定理求乘法逆元"></a>费马小定理求乘法逆元</h2><p>之前学过地exgcd也可以解决求逆元的问题，不过我觉得费马小来得更简单（不是定理本身…而是写法上）<br>这个东西其实一直知道，就是一直没有写一篇博客，考试的时候其实自己用的也不是很多，要不就是做到的要用到逆元的题看不出来，要不就是写高精模和高精除去了（然而没有一次能写清楚）</p>
+<p>以下是费马小定理的基本内容<br>$$<br>a^{p-1}\equiv1\pmod{p}<br>$$</p>
+<p>其中a、p互质</p>
+<p>对于乘法逆元，我们知道(A/B)%M=(A∗(1/B))%M。令1/B等于H，那么H就是B关于M的乘法逆元，其实就是B关于M的一个相反数，B∗H≡1 (mod M)</p>
+<p>将两式联立，不难发现，</p>
+<p>$$<br>H=B^{p-2}<br>$$</p>
+<p>然后快速幂解决就行了，甚至不需要粘代码</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/11/NOIP2018游记/" rel="next" title="NOIP2018游记">
+                <i class="fa fa-chevron-left"></i> NOIP2018游记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/11/模板复习/" rel="prev" title="模板复习">
+                模板复习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">I WANT TO BE A BOLD HERO!!!!!!</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/KL-lovesagiri" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://my.qidian.com/author/402318469" target="_blank" title="Webnovel"><i class="fa fa-fw fa-globe"></i>Webnovel</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://zhongyic00.github.io/" title="ZhYic" target="_blank">ZhYic</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://dimensiontripper.github.io/" title="DimensionTripper" target="_blank">DimensionTripper</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://aokiumi.github.io/" title="Aoki_Umi" target="_blank">Aoki_Umi</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://edgration.com/" title="edgration" target="_blank">edgration</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.vixbob-lwc.pw/" title="ViXbob" target="_blank">ViXbob</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://anoxiacxy.github.io/" title="Anoxiacxy" target="_blank">Anoxiacxy</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展欧几里得（exgcd）解同余方程"><span class="nav-number">1.</span> <span class="nav-text">扩展欧几里得（exgcd）解同余方程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题简述"><span class="nav-number">1.1.</span> <span class="nav-text">问题简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实质"><span class="nav-number">1.2.</span> <span class="nav-text">实质</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展欧几里得算法（exgcd）解不定方程"><span class="nav-number">2.</span> <span class="nav-text">扩展欧几里得算法（exgcd）解不定方程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速幂-快速乘法"><span class="nav-number">3.</span> <span class="nav-text">快速幂+快速乘法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#费马小定理求乘法逆元"><span class="nav-number">4.</span> <span class="nav-text">费马小定理求乘法逆元</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright"> &copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.4.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
